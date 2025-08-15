@@ -1,0 +1,13 @@
+# Diretórios de ambiente virtual
+venv/
+.env/
+# Arquivos de cache
+__pycache__/
+*.pyc
+# Arquivos de configuração
+.vscode/
+.idea/
+# Arquivos temporários
+*.log
+*.swp
+.DS_Store
