@@ -1,14 +1,13 @@
-import tkinter as tk
+import ttkbootstrap as tk
 
 #Criando janela
-janela = tk.Tk()
+janela = tk.Window(themename = "vapor")
 janela.title("Janela_Personalizada_Ana")
 #Mudando o tamanho da tela
 janela.geometry("500x500+180+0")
 #Permitindo a mudança da janela
 janela.resizable(True,True)
-#Mudando a cor da janela
-janela.configure(bg="#1b22a7")
+
 #Mudar o icone da janela
 janela.iconbitmap("01_Hello_World/computador.ico")
 
@@ -40,7 +39,6 @@ c_n.pack()
 #
 b_bd = tk.Button(janela,
                  text="Desejar bom dia!!!",
-                 height=2,
                  command= mostrar)
 b_bd.pack(pady=20)
 
