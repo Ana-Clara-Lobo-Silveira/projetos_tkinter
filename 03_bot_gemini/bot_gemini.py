@@ -1,6 +1,7 @@
 import google.generativeai as genai
 
 class Boot_gemini:
+
     """Criando um robo especialista em arte."""
     
     def __init__(self):
@@ -23,3 +24,10 @@ class Boot_gemini:
 
         resposta = self.chat.send_message(pergunta)
         return resposta.text
+    
+
+#Ultilizado para testes, roda no arquivo, nãon roda quando importado
+if __name__ == "__main__":
+    robo = Boot_gemini()
+    resposta = robo.responder("Quem é a pessoa mais amada do Brasil")
+    print(resposta)
