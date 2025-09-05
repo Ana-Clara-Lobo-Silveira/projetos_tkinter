@@ -7,6 +7,7 @@ class Janela_chat():
         self.janela.iconbitmap("03_bot_gemini/bat.ico")
         self.janela.geometry("1200x800")
         self.janela.resizable(0,0)
+
         ti = ttk.Label(self.janela,
                       text= "Ms. Gothart",
                       font= ('Times-New-Roman', 40))
@@ -39,13 +40,18 @@ class Janela_chat():
                        foreground= "#9D00FF")
         self.re.pack(pady=(20,0))
 
+        self.at = ttk.ScrolledText(self.janela, height = 20, wrap = "word")
+        self.at.pack(pady=10,padx=10,fill="both", expand=True)
         
         self.robo = Boot_gemini()
 #------------------------------------------------------------------------------------------------------------------------------
     def resposta(self):
         p = self.c_t.get()
         r = self.robo.responder(p)
-        self.re.configure(text = f"{r}")
+        self.re.configure(font=("Times New Roman", 60))
+
+        self.at.delete("1.0",ttk.END)
+        self.at.insert("1.0",r)
 #------------------------------------------------------------------------------------------------------------------------------
     def run(self):
         self.janela.mainloop()
