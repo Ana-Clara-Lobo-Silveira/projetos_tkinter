@@ -5,7 +5,7 @@ class Janela_chat():
     def __init__(self):
         self.janela = ttk.Window(title="Ms.Gothart Alternativa", themename= "vapor")
         self.janela.iconbitmap("03_bot_gemini/bat.ico")
-        self.janela.geometry("1200x800")
+        self.janela.geometry("800x600")
         self.janela.resizable(0,0)
 
         ti = ttk.Label(self.janela,
