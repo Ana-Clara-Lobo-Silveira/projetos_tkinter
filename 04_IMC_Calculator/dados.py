@@ -46,14 +46,29 @@ class Janela_dados:
                 self.rc.pack(pady=(20,0))
 
 #----------------------------------------------------------------------------------------------------------------------
+
+                self.result = ttk.Label(self.janela,
+                                        text = (""))
+#----------------------------------------------------------------------------------------------------------------------
         def coleta(self):
                 caixa_peso_str = self.r_p.get()
                 caixa_altura_str = self.r_a.get()
                 c_peso = float(caixa_peso_str)
                 c_altura = float(caixa_altura_str)
                 self.conta = c_peso/c_altura**2
-                self.rc.configure(text = f"O seu IMC é: {self.conta:.1f}")
 
+
+                
+                if self.conta <= 18.5:
+                        self.result = ttk.Label(text = "abaixo peso").pack()
+                else:
+                        self.result = ttk.Label(text = "okkoo").pack()
+
+                self.result.pack()
+
+                self.rc.configure(text = f"O seu IMC é: {self.conta:.1f}")
+                self.result.configure(text = self.result)
+#---------------------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------
