@@ -45,30 +45,34 @@ class Janela_dados:
                         foreground= "#9D00FF")
                 self.rc.pack(pady=(20,0))
 
-#----------------------------------------------------------------------------------------------------------------------
-
-                self.result = ttk.Label(self.janela,
-                                        text = (""))
+                self.res = ttk.Label(text = "",                                
+                                     font=("Calisto MT", 20),
+                                     foreground="#7700FF")
+                self.res.pack()
 #----------------------------------------------------------------------------------------------------------------------
         def coleta(self):
                 caixa_peso_str = self.r_p.get()
                 caixa_altura_str = self.r_a.get()
                 c_peso = float(caixa_peso_str)
                 c_altura = float(caixa_altura_str)
+                #if c_peso != float or c_altura != float:
+                       #messa
                 self.conta = c_peso/c_altura**2
 
-
-                
-                if self.conta <= 18.5:
-                        self.result = ttk.Label(text = "abaixo peso").pack()
+                if self.conta < 18.5:
+                       self.res.configure (text="Você está abaixo do peso!")
+                elif self.conta >= 18.5 and self.conta<=24.9:
+                       self.res.configure (text="Você está normoponderal!")
+                elif self.conta >=25 and self.conta<=29.9:
+                       self.res.configure (text="Você possui pré-obesidade!")
+                elif self.conta >= 30 and self.conta<=34.9:
+                       self.res.configure (text="Você possui grau I de obesidade!")
+                elif self.conta >=35 and self.conta<=39.9:
+                       self.res.configure (text="Você possui grau II de obesidade!")
                 else:
-                        self.result = ttk.Label(text = "okkoo").pack()
-
-                self.result.pack()
+                       self.res.configure(text="Você possui obesidade mórbida!")
 
                 self.rc.configure(text = f"O seu IMC é: {self.conta:.1f}")
-                self.result.configure(text = self.result)
-#---------------------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------
