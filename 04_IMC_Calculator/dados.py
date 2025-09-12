@@ -1,6 +1,6 @@
 #_____________________________________________________________________________________________________________________________________________________________________________________________________
 import ttkbootstrap as ttk
-from PIL import Image, ImageTk
+import tkinter.messagebox
 
 class Janela_dados:
         def __init__(self):
@@ -59,26 +59,25 @@ class Janela_dados:
                         c_peso = float(caixa_peso_str)
                         c_altura = float(caixa_altura_str)
                         self.conta = c_peso/c_altura**2
+                except:
+                        tkinter.messagebox.showerror(title="Erro", message="Por favor insira um valor válido!")
 #-----------------------------------------------------------------------------------------------------------------------Condições referentes aio valor do IMC
-                        if self.conta < 18.5:
-                                self.res.configure (text="Você está abaixo do peso!")
-                                
-                        elif self.conta >= 18.5 and self.conta<=24.9:
-                                self.res.configure (text="Você está normoponderal!")
-                        elif self.conta >=25 and self.conta<=29.9:
-                                self.res.configure (text="Você possui pré-obesidade!")
-                        elif self.conta >= 30 and self.conta<=34.9:
-                                self.res.configure (text="Você possui grau I de obesidade!")
-                        elif self.conta >=35 and self.conta<=39.9:
-                                self.res.configure (text="Você possui grau II de obesidade!")
-                        else:
-                                self.res.configure(text="Você possui obesidade mórbida!")
+                if self.conta < 18.5:
+                        self.res.configure (text="Você está abaixo do peso!")
+                        
+                elif self.conta >= 18.5 and self.conta<=24.9:
+                        self.res.configure (text="Você está normoponderal!")
+                elif self.conta >=25 and self.conta<=29.9:
+                        self.res.configure (text="Você possui pré-obesidade!")
+                elif self.conta >= 30 and self.conta<=34.9:
+                        self.res.configure (text="Você possui grau I de obesidade!")
+                elif self.conta >=35 and self.conta<=39.9:
+                        self.res.configure (text="Você possui grau II de obesidade!")
+                else:
+                        self.res.configure(text="Você possui obesidade mórbida!")
 
-                        self.rc.configure(text = f"O seu IMC é: {self.conta:.1f}")
-                except ValueError:
-                       self.rc.configure (text = "Erro!! Verifique se todas as informações condizem com os critérios!",                               
-                                         font=("Calisto MT", 15),
-                                         foreground="#7700FF")
+                self.rc.configure(text = f"O seu IMC é: {self.conta:.1f}")
+
 
 #-----------------------------------------------------------------------------------------------------------------------Mantém a janela aberta
         def run(self):
