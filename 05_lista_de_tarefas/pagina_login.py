@@ -1,5 +1,6 @@
 import ttkbootstrap as ttk
 import tkinter.messagebox
+from pagina_lista_tarefas import Janela_pagina
 
 class Janela_login:
     def __init__(self):
@@ -43,7 +44,7 @@ class Janela_login:
         frame_botao.pack()
 #---------------------------------------------------------------------------------------------------------------------------
         ttk.Button(frame_botao,text="Entrar",width=30,padding = 9,command=self.enviado).pack(pady=(20,0),side="left",padx=20)
-        ttk.Button(frame_botao,text="Sair",width=30,padding=9,command=self.janela.destroy).pack(pady=(20,0),side="right",padx=20)
+        ttk.Button(frame_botao,text="Sair",width=30,padding=9,command=self.sair).pack(pady=(20,0),side="right",padx=20)
 #---------------------------------------------------------------------------------------------------------------------------
 
         self.mostrar = ttk.Label(self.janela,
@@ -52,24 +53,34 @@ class Janela_login:
                                 foreground="#7300FF")
         self.mostrar.pack(pady=(20,0))
 #---------------------------------------------------------------------------------------------------------------------------
+    def sair(self):
+        resposta = tkinter.messagebox.askyesno(title="Sair", message="Você realmente deseja sair?")
+        if resposta == True:
+            exit()
+
+    
     def enviado(self):
 
         self.c_u = self.caixa_usuario.get()
         self.c_s = self.caixa_senha.get()
+
 #---------------------------------------------------------------------------------------------------------------------------
         if self.c_u == "" or self.c_s == "":
             tkinter.messagebox.showerror(title="Erro", message="Confira se todos os dados foram preenchidos corretamente")
         else:
             if self.c_u == "Godofredo" and self.c_s == "amogirassol":
                 self.mostrar.configure(text="Login efetuado")
-                tkinter.messagebox.showinfo(title="Login", message="Login efetuado!")
+                self.janela.destroy()
+                janela_tarefas = Janela_pagina( )
+                janela_tarefas.run()
+
             else:
                 self.mostrar.configure(text="Login incorreto")
                 tkinter.messagebox.showerror(title="Login", message="Login incorreto, confira se todos os dados foram preenchidos corretamente")
 
+
     def run(self):
         self.janela.mainloop()  
-
 
 if __name__ == "__main__":
     janela_c = Janela_login()
