@@ -1,6 +1,7 @@
 import ttkbootstrap as ttk
 import tkinter as tk
 from tkinter import Listbox
+import tkinter.messagebox
 
 
 class Janela_pagina:
@@ -25,7 +26,7 @@ class Janela_pagina:
         self.lista = tk.Listbox (self.pagina,height = 20, width=70)
         self.lista.pack(pady=(30,0))
 #-----------------------------------------------------------------------------------------------------------------------------
-        frame_botao_d = ttk.Frame()
+        frame_botao_d = ttk.Frame(style="Vapor")
         frame_botao_d.pack()
 
         ttk.Button(frame_botao_d,text="Excluir",width=40,padding = 9, style = "danger", command= self.excluir).pack(pady=(30,0), padx=20,side="left")
@@ -39,13 +40,20 @@ class Janela_pagina:
 #-----------------------------------------------------------------------------------------------------------------------------
     def excluir(self):
         self.tarefa = self.lista.curselection()
-        self.lista.delete(self.tarefa)
+        if self.tarefa:
+            self.lista.delete(self.tarefa)
+
+        else:
+            tk.messagebox.showerror(message = "Selecione um item para excluir")
 #-----------------------------------------------------------------------------------------------------------------------------
     def marcar(self):
         self.marcado = self.lista.curselection()
-        tarefa = self.lista.get(self.marcado)
-        self.lista.delete(self.marcado)
-        self.lista.insert(self.marcado, tarefa + " ☆ ")
+        if self.marcado:
+            tarefa = self.lista.get(self.marcado)
+            self.lista.delete(self.marcado)
+            self.lista.insert(self.marcado, tarefa + "     ★ CONCLUÍDO")
+        else:
+            tk.messagebox.showerror(message = "Selecione um item para destacar como feito")
 #-----------------------------------------------------------------------------------------------------------------------------
     def run(self):
         self.pagina.mainloop()
