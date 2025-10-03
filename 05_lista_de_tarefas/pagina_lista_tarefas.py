@@ -47,16 +47,22 @@ class Janela_pagina:
         self.conexao.commit() #comitar as alterações
         self.cursor.close() #desligar o cursor e a conexão
         self.conexao.close()
+
+        self.atualizar()
 #-----------------------------------------------------------------------------------------------------------------------------
+    def atualizar (self):
         self.conexaot = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
         self.cursort = self.conexaot.cursor()
         self.sql_atualizar_tarefas = """
-                                        SELECT tarefa FROM tarefas;
+                                        SELECT codigo,tarefa FROM tarefas;
                                     """
         self.cursort.execute(self.sql_atualizar_tarefas)
         self.lista_tarefas = self.cursort.fetchall()
         self.cursort.close()
         self.conexaot.close()
+
+        for linha in self.lista_tarefas:
+            self.lista.insert("end", linha[1])
 #-----------------------------------------------------------------------------------------------------------------------------
     def adicionar_tarefa(self):
         self.caixa = self.caixa_adicionar.get()
@@ -82,7 +88,17 @@ class Janela_pagina:
     def excluir(self):
         self.tarefa = self.lista.curselection()
         if self.tarefa:
-            self.lista.delete(self.tarefa)
+            self.tarefad = self.lista.get(self.tarefa)
+
+            self.conexaoq = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
+            self.cursorq = self.conexaoq.cursor()
+            self.sql_delete = f"""
+                                DELETE FROM tarefas WHERE tarefa = {self.tarefad};
+                              """
+            self.cursor.execute(self.sql_delete)
+            self.conexaoq.commit()
+            self.cursorq.close()
+            self.conexaoq.close()
         else:
             tk.messagebox.showerror(message = "Selecione um item para excluir")
 #-----------------------------------------------------------------------------------------------------------------------------
