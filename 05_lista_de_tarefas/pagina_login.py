@@ -13,26 +13,22 @@ class Janela_login:
                            foreground="#7300FF")
         titulo.pack(pady= (40,0))
 #---------------------------------------------------------------------------------------------------------------------------
-
         texto_usuario = ttk.Label(text= "Usuário",
                            font=("Times New Roman",30),
                            foreground="#7300FF")
         texto_usuario.pack(pady= (30,0))
 #---------------------------------------------------------------------------------------------------------------------------
-
         self.caixa_usuario = ttk.Entry(self.janela,
                                        justify="center",
                            font=("Times New Roman",20),
                            foreground="#7300FF")
         self.caixa_usuario.pack(pady=(20,0))
 #---------------------------------------------------------------------------------------------------------------------------
-
         texto_senha = ttk.Label(text= "Senha",
                            font=("Times New Roman",30),
                            foreground="#7300FF")
         texto_senha.pack(pady= (30,0))
 #---------------------------------------------------------------------------------------------------------------------------
-
         self.caixa_senha = ttk.Entry(self.janela,
                                      justify="center",
                            font=("Times New Roman",20),
@@ -46,7 +42,6 @@ class Janela_login:
         ttk.Button(frame_botao,text="Entrar",width=30,padding = 9,command=self.enviado).pack(pady=(20,0),side="left",padx=20)
         ttk.Button(frame_botao,text="Sair",width=30,padding=9,command=self.sair).pack(pady=(20,0),side="right",padx=20)
 #---------------------------------------------------------------------------------------------------------------------------
-
         self.mostrar = ttk.Label(self.janela,
                                  text=" ",
                                 font=("Times New Roman",20),
@@ -68,7 +63,7 @@ class Janela_login:
         if self.c_u == "" or self.c_s == "":
             tkinter.messagebox.showerror(title="Erro", message="Confira se todos os dados foram preenchidos corretamente")
         else:
-            if self.c_u == "Godofredo" and self.c_s == "amogirassol":
+            if self.c_u == "a" and self.c_s == "a":
                 self.mostrar.configure(text="Login efetuado")
                 self.janela.destroy()
                 janela_tarefas = Janela_pagina( )

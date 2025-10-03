@@ -1,4 +1,4 @@
 from bot_gemini import Boot_gemini
 robo = Boot_gemini()
-res = robo.responder("Quem foi o maior artista do modernismo brasileiro?")
+res = robo.responder("Conte tudo sobre a moda e cultura punk")
 print(res)
