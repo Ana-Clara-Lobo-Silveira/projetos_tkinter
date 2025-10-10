@@ -32,7 +32,7 @@ class Janela_pagina:
         ttk.Button(frame_botao_d,text="Excluir",width=40,padding = 9, style = "danger", command= self.excluir).pack(pady=(30,0), padx=20,side="left")
 
         ttk.Button(frame_botao_d,text="Feito",width=40,padding = 9, command= self.marcar).pack(pady=(30,0), padx=20,side="right")
-#-----------------------------------------------------------------------------------------------------------------------------
+#-1----------------------------------------------------------------------------------------------------------------------------
         self.conexao = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
         self.cursor = self.conexao.cursor()
 
@@ -49,7 +49,7 @@ class Janela_pagina:
         self.conexao.close()
 
         self.atualizar()
-#-----------------------------------------------------------------------------------------------------------------------------
+#-3----------------------------------------------------------------------------------------------------------------------------
     def atualizar (self):
         self.conexaot = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
         self.cursort = self.conexaot.cursor()
@@ -63,7 +63,7 @@ class Janela_pagina:
 
         for linha in self.lista_tarefas:
             self.lista.insert("end", linha[1])
-#-----------------------------------------------------------------------------------------------------------------------------
+#-2----------------------------------------------------------------------------------------------------------------------------
     def adicionar_tarefa(self):
         self.caixa = self.caixa_adicionar.get()
         if self.caixa == "":
@@ -83,33 +83,50 @@ class Janela_pagina:
             self.conexaod.commit()
             self.cursord.close() #desligar o cursor e a conexão
             self.conexaod.close()
+#---------------------------------------------------------------------------------------------------------------------------
 
-#-----------------------------------------------------------------------------------------------------------------------------
+#-4----------------------------------------------------------------------------------------------------------------------------
     def excluir(self):
-        self.tarefa = self.lista.curselection()
-        if self.tarefa:
-            self.tarefad = self.lista.get(self.tarefa)
+        self.tarefaq = self.lista.curselection()
+        if self.tarefaq:
+            self.tarefaqq = self.lista.get(self.tarefaq)
+            self.lista.delete(self.tarefaq)
 
-            self.conexaoq = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
-            self.cursorq = self.conexaoq.cursor()
-            self.sql_delete = f"""
-                                DELETE FROM tarefas WHERE tarefa = {self.tarefad};
-                              """
-            self.cursor.execute(self.sql_delete)
-            self.conexaoq.commit()
-            self.cursorq.close()
-            self.conexaoq.close()
         else:
             tk.messagebox.showerror(message = "Selecione um item para excluir")
-#-----------------------------------------------------------------------------------------------------------------------------
+
+        self.conexaoq = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
+        self.cursorq = self.conexaoq.cursor()
+        self.sql_delete = """
+                            DELETE FROM tarefas WHERE tarefa = (?)
+                            """
+        self.cursorq.execute(self.sql_delete, [self.tarefaqq])
+        self.conexaoq.commit()
+        self.cursorq.close()
+        self.conexaoq.close()
+#-5----------------------------------------------------------------------------------------------------------------------------
     def marcar(self):
         self.marcado = self.lista.curselection()
         if self.marcado:
-            tarefa = self.lista.get(self.marcado)
+            self.tarefa = self.lista.get(self.marcado)
             self.lista.delete(self.marcado)
-            self.lista.insert(self.marcado, tarefa + "           ★ CONCLUÍDO")
+            self.lista.insert(self.marcado, self.tarefa + "           ★ CONCLUÍDO")
         else:
             tk.messagebox.showerror(message = "Selecione um item para destacar como feito")
+
+        ###############################################################################
+        self.conexaoc = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
+        self.cursorc = self.conexaoc.cursor()
+        
+        self.sql_update =   """
+                                UPDATE tarefas SET tarefa = (?) WHERE tarefa = (?)
+                            """
+
+        self.cursorc.execute(self.sql_update,[self.tarefa + "- ★ CONCLUÍDO",self.tarefa])
+        self.conexaoc.commit()
+        self.cursorc.close() #desligar o cursor e a conexão
+        self.conexaoc.close()
+
 
 #-----------------------------------------------------------------------------------------------------------------------------
 
