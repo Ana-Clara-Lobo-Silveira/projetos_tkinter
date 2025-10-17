@@ -61,7 +61,7 @@ class Janela_cadastro():
                 show="*")
                 self.caixa_confirmar_senha.pack(pady=(20,0))
 #---------------------------------------------------------------------------------------------------------------------------
-                ttk.Button(self.janela_c, text="Cadastrar-se").pack()
+                ttk.Button(self.janela_c, text="Cadastrar-se", command=self.inserir_usuario).pack()
                 self.criar_usuario()
 #---------------------------------------------------------------------------------------------------------------------------
         def criar_usuario (self): 
@@ -75,22 +75,27 @@ class Janela_cadastro():
                 self.conexao.commit()
                 self.conexao.close()
                 self.cursor.close()
+
         def inserir_usuario (self):
+
+                self.nome = self.caixa_nome.get()
+                self.usuario = self.caixa_usuario.get()
+                self.senha = self.caixa_senha.get()
+
                 self.conexao_d = sqlite3.connect("./bd_lista_tarefa.sqlite")
                 self.cursor_d = self.cursor.conexao_d()
                 self.cursor_d.execute("""INSERT INTO usuario
                                         (nome, usuario, senha)
-                                        VALUES ("Frederico Ferdinando", "Fefe", "123")
-                                        ;
-                                        """)
+                                        VALUES (?,?,?);
+                                        """,[self.nome, self.usuario, self.senha])
                 self.conexao_d.commit()
                 self.conexao_d.close()
                 self.cursor_d.close()
-                
+
 #---------------------------------------------------------------------------------------------------------------------------
         def run(self):
                 self.janela_c.mainloop()
 
-        if __name__ == "__main__":
-                janela_c = Janela_cadastro()
-                janela_c.run() #janela_c.janela.mainloop()
+if __name__ == "__main__":
+        janela_c = Janela_cadastro()
+        janela_c.run() #janela_c.janela.mainloop()
