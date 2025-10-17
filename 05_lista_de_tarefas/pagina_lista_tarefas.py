@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import Listbox
 import tkinter.messagebox
 import sqlite3
+from pagina_login import Janela_login
 
 class Janela_pagina:
     def __init__(self):
@@ -49,6 +50,10 @@ class Janela_pagina:
         self.conexao.close()
 
         self.atualizar()
+
+        janela_login = Janela_login(self.pagina)
+        self.pagina.withdraw()
+
 #-3----------------------------------------------------------------------------------------------------------------------------
     def atualizar (self):
         self.conexaot = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
@@ -126,6 +131,7 @@ class Janela_pagina:
         self.conexaoc.commit()
         self.cursorc.close() #desligar o cursor e a conexão
         self.conexaoc.close()
+
 
 
 #-----------------------------------------------------------------------------------------------------------------------------

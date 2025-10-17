@@ -1,4 +1,4 @@
-from pagina_login import Janela_login
+from pagina_lista_tarefas import Janela_pagina
 
-app = Janela_login()
+app = Janela_pagina()
 app.run()

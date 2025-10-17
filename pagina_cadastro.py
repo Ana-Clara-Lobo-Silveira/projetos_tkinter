@@ -1,29 +1,31 @@
 import ttkbootstrap as ttk
 
 class Janela_cadastro:
-    def __init__(self):
-        self.janela_c = ttk.Window (title="Cadastro", themename="vapor")
+    def __init__(self, janela_principal):
+        self.janela_c = ttk.Toplevel(janela_principal)
+        self.janela_principal_d = janela_principal
         self.janela_c.geometry("1200x900")
         self.janela_c.resizable(0,0)
 #-----------------------------------------------------------------------------------------------------------------------------
-        titulo = ttk.Label(text= "Cadastro",
+        titulo = ttk.Label(self.janela_c,
+                        text= "Cadastre-se",
                            font=("Times New Roman",40),
                            foreground="#7300FF"
                            )
         titulo.pack(pady= (40,0))
 #---------------------------------------------------------------------------------------------------------------------------
-        texto_nome = ttk.Label(text= "Nome:",
+        texto_nome = ttk.Label(self.janela_c,text= "Nome:",
                            font=("Times New Roman",20),
                            foreground="#7300FF")
         texto_nome.pack(pady= (30,0))
 #---------------------------------------------------------------------------------------------------------------------------
-        self.caixa_nome = ttk.Entry(self.janela_c,
+        self.caixa_nome = ttk.Entry(self.janela_c,self.janela_c,
                                        justify="center",
                            font=("Times New Roman",20),
                            foreground="#7300FF")
         self.caixa_nome.pack(pady=(20,0))
 #---------------------------------------------------------------------------------------------------------------------------
-        texto_usuario = ttk.Label(text= "Usuário:",
+        texto_usuario = ttk.Label(self.janela_c,text= "Usuário:",
                            font=("Times New Roman",20),
                            foreground="#7300FF")
         texto_usuario.pack(pady= (30,0))
@@ -34,7 +36,7 @@ class Janela_cadastro:
                            foreground="#7300FF")
         self.caixa_usuario.pack(pady=(20,0))
 #---------------------------------------------------------------------------------------------------------------------------
-        texto_senha = ttk.Label(text= "Senha:",
+        texto_senha = ttk.Label(self.janela_c,text= "Senha:",
                            font=("Times New Roman",20),
                            foreground="#7300FF")
         texto_senha.pack(pady= (30,0))
@@ -46,7 +48,7 @@ class Janela_cadastro:
                            show="*")
         self.caixa_senha.pack(pady=(20,0))
 #---------------------------------------------------------------------------------------------------------------------------
-        texto_confirmar_senha = ttk.Label(text= "Confirmar senha:",
+        texto_confirmar_senha = ttk.Label(self.janela_c,text= "Confirmar senha:",
                            font=("Times New Roman",20),
                            foreground="#7300FF")
         texto_confirmar_senha.pack(pady= (30,0))
@@ -57,6 +59,8 @@ class Janela_cadastro:
                            foreground="#7300FF",
                            show="*")
         self.caixa_confirmar_senha.pack(pady=(20,0))
+#---------------------------------------------------------------------------------------------------------------------------
+
 #---------------------------------------------------------------------------------------------------------------------------
     def run(self):
         self.janela_c.mainloop()
