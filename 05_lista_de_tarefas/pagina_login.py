@@ -45,12 +45,16 @@ class Janela_login:
 #---------------------------------------------------------------------------------------------------------------------------
         ttk.Button(frame_botao,text="Entrar",width=30,padding = 9,command=self.enviado).pack(pady=(20,0),side="left",padx=20)
         ttk.Button(frame_botao,text="Sair",width=30,padding=9,command=self.sair).pack(pady=(20,0),side="right",padx=20)
+        ttk.Button(frame_botao,text="Cadastre-se",width=30,padding=9).pack(pady=(20,0),side="center",padx=20)
 #---------------------------------------------------------------------------------------------------------------------------
         self.mostrar = ttk.Label(self.janela,
                                  text=" ",
                                 font=("Times New Roman",20),
                                 foreground="#7300FF")
         self.mostrar.pack(pady=(20,0))
+
+        janela_cadastro = Janela_cadastro(self.janela)
+        self.janela.withdraw()
 #---------------------------------------------------------------------------------------------------------------------------
     def sair(self):
         resposta = tkinter.messagebox.askyesno(title="Sair", message="Você realmente deseja sair?")
