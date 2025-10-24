@@ -77,13 +77,12 @@ class Janela_cadastro():
                 self.conexao.close()
 
         def inserir_usuario (self):
+                try:
 
-                self.nome = self.caixa_nome.get()
-                self.usuario = self.caixa_usuario.get()
-                self.senha = self.caixa_senha.get()
+                        self.nome = self.caixa_nome.get()
+                        self.usuario = self.caixa_usuario.get()
+                        self.senha = self.caixa_senha.get()
 
-                cad = tkinter.messagebox.askyesno(title="Cadastro", message="Você deseja cadastrar-se?")
-                if cad == True:
                         self.conexao_d = sqlite3.connect("./bd_lista_tarefa.sqlite")
                         self.cursor_d = self.conexao_d.cursor()
                         self.cursor_d.execute("""INSERT INTO usuario
@@ -91,8 +90,15 @@ class Janela_cadastro():
                                                 VALUES (?,?,?);
                                                 """,[self.nome, self.usuario, self.senha])
                         self.conexao_d.commit()
-                        self.conexao_d.close()
+                        
+                        tkinter.messagebox.showinfo(title="Cadastro", message="Cadastro efetuado com sucesso!")
 
+                except:
+                        tkinter.messagebox.showerror(title="Cadastro", message="Houve um erro na conclusão de cadastro!")
+                
+                finally:        
+                        self.conexao_d.close()
+                
 
 #---------------------------------------------------------------------------------------------------------------------------
         def run(self):
