@@ -84,5 +84,5 @@ class Janela_login:
         self.janela.mainloop()  
 
 if __name__ == "__main__":
-    janela_l = Janela_login("hhtesyre")
+    janela_l = Janela_login()
     janela_l.run() #janela_c.janela.mainloop()
