@@ -71,8 +71,11 @@ class Janela_login:
 
                 self.conexao_a = sqlite3.connect("./bd_lista_tarefa.sqlite")
                 self.cursor_a = self.conexao_a.cursor()
-                self.verificacao = """SELECT usuario, nome from usuario
-                                        WHERE usuario = "Fefe" and senha= "123";"""
+                self.verificacao = ("""SELECT usuario, nome from usuario
+                                        WHERE usuario = ? and senha= ?;"""
+                                    [self.c_u,self.c_s]
+                                    )
+
                 #---------------------------------------------------------------------------------------------------------------------------
                 if self.c_u == "" or self.c_s == "":
                         tkinter.messagebox.showerror(title="Erro", message="Confira se todos os dados foram preenchidos corretamente")
