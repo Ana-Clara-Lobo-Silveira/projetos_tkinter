@@ -71,28 +71,25 @@ class Janela_login:
 
                 self.conexao_a = sqlite3.connect("./bd_lista_tarefa.sqlite")
                 self.cursor_a = self.conexao_a.cursor()
-                self.verificacao = ("""SELECT usuario, nome from usuario
-                                        WHERE usuario = ? and senha= ?;"""
+                self.cursor_a.execute ("""SELECT usuario, nome from usuario
+                                        WHERE usuario = ? and senha= ?;""",
                                     [self.c_u,self.c_s]
                                     )
+                
+                resultado_verificacao = self.cursor_a.fetchone()
+
+                self.conexao_a.close()
 
                 #---------------------------------------------------------------------------------------------------------------------------
-                if self.c_u == "" or self.c_s == "":
-                        tkinter.messagebox.showerror(title="Erro", message="Confira se todos os dados foram preenchidos corretamente")
+                if resultado_verificacao:
+                        self.mostrar.configure(text="Login efetuado")
+                        self.janela.destroy()
+                        self.janela_principal.deiconify()
                 else:
-                        if self.c_u == "a" and self.c_s == "a":
-                                self.mostrar.configure(text="Login efetuado")
-                                self.janela.destroy()
-                                self.janela_principal.deiconify()
+                        self.mostrar.configure(text="Login incorreto")
+                        tkinter.messagebox.showerror(title="Login", message="Login incorreto, confira se todos os dados foram preenchidos corretamente")
 
-                        else:
-                                self.mostrar.configure(text="Login incorreto")
-                                tkinter.messagebox.showerror(title="Login", message="Login incorreto, confira se todos os dados foram preenchidos corretamente")
-
-
-        def run(self):
-                self.janela.mainloop()  
 
 if __name__ == "__main__":
         janela_l = Janela_login("")
-        janela_l.run() #janela_c.janela.mainloop()
+        janela_l.janela.mainloop()
