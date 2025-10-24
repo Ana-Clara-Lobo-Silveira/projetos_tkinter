@@ -1,7 +1,6 @@
 import ttkbootstrap as ttk
 import tkinter.messagebox
 import sqlite3
-
 class Janela_cadastro():
         def __init__(self, janela_principal_d):
                 self.janela_c = ttk.Toplevel(janela_principal_d)
@@ -48,7 +47,7 @@ class Janela_cadastro():
                 font=("Times New Roman",20),
                 foreground="#7300FF",
                 show="*")
-                self.caixa_senha.pack(pady=(20,0))
+                self.caixa_senha.pack(pady=(20,20))
 #---------------------------------------------------------------------------------------------------------------------------
 #                 texto_confirmar_senha = ttk.Label(self.janela_c,text= "Confirmar senha:",
 #                 font=("Times New Roman",20),
@@ -63,7 +62,11 @@ class Janela_cadastro():
 #                 self.caixa_confirmar_senha.pack(pady=(20,0))
 #---------------------------------------------------------------------------------------------------------------------------
                 self.criar_usuario()
-                ttk.Button(self.janela_c, text="Cadastrar-se", command= self.inserir_usuario).pack()
+                ttk.Button(self.janela_c, text="Cadastrar-se",width=50,padding=9, command= self.inserir_usuario).pack()
+
+        # def voltar(self):
+        #         janela_login = Janela_login(self.janela_c)
+        #         self.pagina.withdraw()
 #---------------------------------------------------------------------------------------------------------------------------
         def criar_usuario (self): 
                 self.conexao = sqlite3.connect("./bd_lista_tarefa.sqlite")
