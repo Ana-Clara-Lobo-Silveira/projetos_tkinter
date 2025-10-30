@@ -54,7 +54,7 @@ class Janela_pagina:
 
         self.atualizar()
 
-        janela_login = Janela_login(self.pagina)
+        janela_login = Janela_login(self)
         self.pagina.withdraw()
 
 #-3----------------------------------------------------------------------------------------------------------------------------
@@ -62,9 +62,9 @@ class Janela_pagina:
         self.conexaot = sqlite3.connect("05_lista_de_tarefas/bd_lista_tarefa.sqlite")
         self.cursort = self.conexaot.cursor()
         self.sql_atualizar_tarefas = """
-                                        SELECT codigo,tarefa FROM tarefas;
+                                        SELECT codigo,tarefa FROM tarefas where usuario = ?;  
                                     """
-        self.cursort.execute(self.sql_atualizar_tarefas)
+        self.cursort.execute(self.sql_atualizar_tarefas, [self.log_usuario])
         self.lista_tarefas = self.cursort.fetchall()
         self.cursort.close()
         self.conexaot.close()

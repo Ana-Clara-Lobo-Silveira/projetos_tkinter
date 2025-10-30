@@ -4,9 +4,12 @@ import tkinter.messagebox
 from pagina_cadastro import Janela_cadastro
 
 class Janela_login:
-        def __init__(self,janela_principal):
-                self.janela = ttk.Toplevel(janela_principal)
-                self.janela_principal = janela_principal
+        def __init__(self,classe_principal):
+                self.janela_principal = classe_principal.pagina
+                self.classe_principal = classe_principal
+
+
+                self.janela = ttk.Toplevel(self.janela_principal)
                 self.janela.geometry("1200x800")
                 self.janela.resizable(0,0)
 
@@ -85,7 +88,8 @@ class Janela_login:
                         self.mostrar.configure(text="Login efetuado")
                         self.janela.destroy()
                         self.janela_principal.deiconify()
-                        self.janela_principal.log_usuario = self.c_u
+                        self.classe_principal.log_usuario = self.c_u
+                        self.classe_principal.atualizar()
                 else:
                         self.mostrar.configure(text="Login incorreto")
                         tkinter.messagebox.showerror(title="Login", message="Login incorreto, confira se todos os dados foram preenchidos corretamente")
