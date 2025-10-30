@@ -7,6 +7,8 @@ from pagina_login import Janela_login
 
 class Janela_pagina:
     def __init__(self):
+        self.log_usuario = None
+
         self.pagina = ttk.Window (title="Lista de tarefas", themename="vapor")
         self.pagina.geometry("1200x900")
         self.pagina.resizable(0,0)
@@ -39,8 +41,9 @@ class Janela_pagina:
 
         self.sql_para_criar_tabela = """
                                     CREATE TABLE IF NOT EXISTS tarefas (
-                                    codigo integer primary key autoincrement,
-                                    tarefa varchar(200)
+                                    codigo INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    tarefa varchar(200),
+                                    usuario VARCHAR (20)
                                     );
                                 """
         
@@ -80,11 +83,11 @@ class Janela_pagina:
             self.cursord = self.conexaod.cursor()
 
             self.sql_insert = ('''
-                            INSERT INTO tarefas (tarefa)
-                            VALUES (?)
+                            INSERT INTO tarefas (tarefa,usuario)
+                            VALUES (?,?)
                             ''')
             
-            self.cursord.execute(self.sql_insert,[self.caixa])
+            self.cursord.execute(self.sql_insert,[self.caixa, self.log_usuario])
             self.conexaod.commit()
             self.cursord.close() #desligar o cursor e a conexão
             self.conexaod.close()

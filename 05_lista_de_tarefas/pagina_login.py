@@ -85,6 +85,7 @@ class Janela_login:
                         self.mostrar.configure(text="Login efetuado")
                         self.janela.destroy()
                         self.janela_principal.deiconify()
+                        self.janela_principal.log_usuario = self.c_u
                 else:
                         self.mostrar.configure(text="Login incorreto")
                         tkinter.messagebox.showerror(title="Login", message="Login incorreto, confira se todos os dados foram preenchidos corretamente")

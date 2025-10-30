@@ -94,7 +94,7 @@ class Janela_cadastro():
                                                 """,[self.nome, self.usuario, self.senha])
                         self.conexao_d.commit()
                         
-                        tkinter.messagebox.showinfo(title="Cadastro", message=f"Cadastro efetuado com sucesso! Seja bem vindo {self.nome}")
+                        tkinter.messagebox.showinfo(title="Cadastro", message=f"Cadastro efetuado com sucesso! Seja bem vindo {self.nome}!")
 
                 except:
                         tkinter.messagebox.showerror(title="Cadastro", message="Houve um erro na conclusão de cadastro!")
